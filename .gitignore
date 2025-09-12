@@ -1,0 +1,41 @@
+# Node modules
+node_modules/
+
+# Electron-builder caches & output
+dist/
+out/
+build/
+release/
+dist_electron/
+build_electron/
+*.AppImage
+*.dmg
+*.exe
+*.msi
+*.rpm
+*.deb
+*.snap
+
+# Electron-builder generated logs
+builder-debug.yml
+builder-effective-config.yaml
+
+# Packaging junk
+*.asar
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor cruft
+.idea/
+.vscode/
+*.swp
+*.swo
+

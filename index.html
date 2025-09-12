@@ -1,0 +1,110 @@
+<!--
+ * LilGPT — A Little GPT Wrapper
+ * Product Name: Lil' GPT — A Little GPT Wrapper
+ * Description: Minimal Electron wrapper for ChatGPT with tabs (BrowserView),
+ *              persistent profile, and stability tweaks.
+ *
+ * Copyright © 2025 Noelle Hockaday
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 only,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License v3 for more details.
+ *
+ * You should have received a copy of the GNU General Public License v3
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Little Apps — ChatGPT Tabs</title>
+        <style>
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+                background: #0b0f14;
+                color: #e6edf5;
+                font: 14px system-ui;
+            }
+            #tabbar {
+                display: flex;
+                gap: 6px;
+                padding: 8px;
+                background: #111826;
+                border-bottom: 1px solid #1f2a3a;
+                align-items: center;
+            }
+            /* Make the tab list a single-row, horizontally scrollable strip */
+            #tabs {
+                display: flex;
+                flex-direction: row;
+                gap: 6px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                flex: 1 1 auto; /* let it expand between spacer and button */
+            }
+
+            /* Keep each tab from stacking/wrapping/shrinking */
+            #tabs > .tab {
+                flex: 0 0 auto;
+            }
+
+            /* Nicer horizontal scrollbar in Chromium/Electron */
+            #tabs::-webkit-scrollbar {
+                height: 6px;
+            }
+            #tabs::-webkit-scrollbar-thumb {
+                border-radius: 8px;
+            }
+
+            .tab {
+                padding: 6px 10px;
+                border: 1px solid #1f2a3a;
+                border-radius: 8px;
+                cursor: pointer;
+                user-select: none;
+            }
+            .tab.active {
+                background: #1a2336;
+            }
+            #spacer {
+                flex: 1;
+            }
+            #views-placeholder {
+                height: calc(100vh - 42px);
+            }
+            button {
+                background: #1a2336;
+                color: #e6edf5;
+                border: 1px solid #1f2a3a;
+                border-radius: 8px;
+                padding: 6px 10px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="tabbar">
+            <div id="tabs"></div>
+            <div id="spacer"></div>
+            <button id="newTab">+ New</button>
+        </div>
+        <div id="views-placeholder"></div>
+        <div id="tab-search-bar" style="display:none; position:absolute; top:0; left:0; right:0; background:#333; padding:4px; z-index:1000;">
+		  <input id="tab-search-input" type="text" placeholder="Search tabs…" style="width:240px;" />
+		  <div id="tab-search-results"></div>
+		</div>
+        <div id="search-bar" style="display:none; position:absolute; top:0; right:0; background:#222; padding:4px; z-index:1000;">
+		  <input id="search-input" type="text" placeholder="Find…" style="width:200px;" />
+		  <button onclick="closeSearch()">✕</button>
+		</div>
+        <script src="./renderer.js"></script>
+    </body>
+</html>
